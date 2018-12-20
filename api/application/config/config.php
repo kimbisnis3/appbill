@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['base_url'] = '';
+$config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].'';
 
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 $config['uri_protocol']	= 'REQUEST_URI';
 
@@ -46,7 +46,6 @@ $config['cache_query_string'] = FALSE;
 
 $config['encryption_key'] = '';
 
-*/
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
