@@ -11,11 +11,11 @@ function addComma(input) {
     return output;
 }
 
-xfocusApp.config(['$localStorageProvider', '$sessionStorageProvider',
+appbill.config(['$localStorageProvider', '$sessionStorageProvider',
         function($localStorageProvider, $sessionStorageProvider) {
 
-            $localStorageProvider.setKeyPrefix('koperasi');
-            $sessionStorageProvider.setKeyPrefix('koperasi');
+            $localStorageProvider.setKeyPrefix('appbill');
+            $sessionStorageProvider.setKeyPrefix('appbill');
 
         }
     ])
@@ -38,18 +38,6 @@ xfocusApp.config(['$localStorageProvider', '$sessionStorageProvider',
                             switch ($routeParams.file) {
                             case 'dashboard':
                                 returnValue = 'views/dashboard/dashboard.html'
-                            break;
-                            case 'menuedit':
-                                returnValue = 'views/menuedit/menuedit.html'
-                            break;
-                            case 'progress':
-                                returnValue = 'views/progress/progress.html'
-                            break;
-                            case 'laporan':
-                                returnValue = 'views/laporan/laporan_v.html'
-                            break;
-                            case 'cr':
-                                returnValue = 'views/cr/cr.html'
                             break;
                             default:
                                 returnValue = 'views/mainview.html'
@@ -180,17 +168,7 @@ xfocusApp.config(['$localStorageProvider', '$sessionStorageProvider',
 
         this.get = function(u, d, r = function() {}, i = true, rjson = true) {
             var autorhization;
-            if ($localStorage.currentUser) {
-                autorhization = {
-                    'Authorization': 'Bearer ' + $localStorage.currentUser.token
-                    /*'Authorization': $localStorage.currentUser.token*/
-                };
-                d["clId"] = $localStorage.currentUser.cl;
-                d["areaId"] = $localStorage.currentUser.area;
-                d["userId"] = $localStorage.currentUser.user;
-            } else {
                 autorhization = {};
-            }
             $http({
                     headers: autorhization,
                     method: 'GET',
@@ -221,20 +199,9 @@ xfocusApp.config(['$localStorageProvider', '$sessionStorageProvider',
 
         this.post = function(u, d, r = function() {}, i = true, rjson = true) {
             var autorhization;
-            if ($localStorage.currentUser) {
-                autorhization = {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    'Authorization': 'Bearer ' + $localStorage.currentUser.token
-                    /*'Authorization': $localStorage.currentUser.token*/
-                };
-                d["clId"] = $localStorage.currentUser.cl;
-                d["areaId"] = $localStorage.currentUser.area;
-                d["userId"] = $localStorage.currentUser.user;
-            } else {
                 autorhization = {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 };
-            }
             $http({
                     headers: autorhization,
                     transformRequest: function(data) {
@@ -263,20 +230,9 @@ xfocusApp.config(['$localStorageProvider', '$sessionStorageProvider',
 
         this.put = function(u, d, r = function() {}, i = true, rjson = true) {
             var autorhization;
-            if ($localStorage.currentUser) {
-                autorhization = {
-                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-                    'Authorization': 'Bearer ' + $localStorage.currentUser.token
-                    /*'Authorization': $localStorage.currentUser.token*/
-                };
-                d["clId"] = $localStorage.currentUser.cl;
-                d["areaId"] = $localStorage.currentUser.area;
-                d["userId"] = $localStorage.currentUser.user;
-            } else {
                 autorhization = {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 };
-            }
             $http({
                     headers: autorhization,
                     transformRequest: function(data) {
@@ -305,15 +261,7 @@ xfocusApp.config(['$localStorageProvider', '$sessionStorageProvider',
 
         this.delete = function(u, d, r = function() {}, i = true, rjson = true) {
             var autorhization;
-            if ($localStorage.currentUser) {
-                autorhization = {
-                    'Authorization': 'Bearer ' + $localStorage.currentUser.token
-                    /*'Authorization': $localStorage.currentUser.token*/
-                };
-                d["userId"] = $localStorage.currentUser.user;
-            } else {
                 autorhization = {};
-            }
             u = u + Object.values(d).join('/');
             $http({
                     headers: autorhization,
